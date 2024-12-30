@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学年歴【瀬田学舎】</title>
+    <link rel="stylesheet" href="styles/calendar.css">
+</head>
+
+<body>
+    <!-- フローティングボタン -->
+    <button id="open-ics-modal" class="btn-primary floating-button">ICSファイル作成</button>
+
+    <div class="calendar-container">
+        <h1 class="title"></h1>
+        <div id="calendar"></div>
+    </div>
+
+    <!-- モーダル (科目名・学期・曜日・講時 選択用) -->
+    <div id="ics-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ICSファイル作成</h2>
+                <button id="close-ics-modal" class="modal-close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <label for="subject-name">科目名:</label>
+                <input type="text" id="subject-name" />
+
+                <label for="semester-select">学期（またはクォーター）:</label>
+                <select id="semester-select">
+                    <option value="前期">前期</option>
+                    <option value="後期">後期</option>
+                    <option value="1Q">1Q</option>
+                    <option value="2Q">2Q</option>
+                    <option value="3Q">3Q</option>
+                    <option value="4Q">4Q</option>
+                </select>
+
+                <!-- 曜日選択 -->
+                <label for="weekday-select">曜日:</label>
+                <select id="weekday-select">
+                    <option value="1">月</option>
+                    <option value="2">火</option>
+                    <option value="3">水</option>
+                    <option value="4">木</option>
+                    <option value="5">金</option>
+                    <option value="6">土</option>
+                </select>
+
+                <label>講時:</label>
+                <div class="period-checkboxes">
+                    <div>
+                        <input type="checkbox" id="period-1" value="1">
+                        <label for="period-1">1講時 (09:15-10:45)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="period-2" value="2">
+                        <label for="period-2">2講時 (11:00-12:30)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="period-3" value="3">
+                        <label for="period-3">3講時 (13:30-15:00)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="period-4" value="4">
+                        <label for="period-4">4講時 (15:15-16:45)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="period-5" value="5">
+                        <label for="period-5">5講時 (17:00-18:30)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="period-6" value="6">
+                        <label for="period-6">6講時 (18:45-20:00)</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="period-7" value="7">
+                        <label for="period-7">7講時 (20:15-21:45)</label>
+                    </div>
+                </div>
+
+                <div id="confirm-list" class="confirm-list hidden"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="create-ics-file" class="btn-primary hidden">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/calendar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,394 @@
+:root {
+    --primary-text: #1a1a1a;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --holiday-color: #dc2626;
+    --saturday-color: #2563eb;
+    --special-color: #8b5cf6;
+    --exam-color: #f97316;
+    --button-bg: #3b82f6;
+    --button-text: #fff;
+    --input-border: #cbd5e1;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    position: relative;
+}
+
+/* フローティングボタン */
+.floating-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.floating-button:hover {
+    transform: translateY(-2px);
+}
+
+/* ボタン、セレクト、インプット等のデザイン */
+button,
+select,
+input[type="text"] {
+    margin: 4px 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--input-border);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.calendar-container {
+    max-width: 1200px;
+    width: 95%;
+    margin: 20px auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.title {
+    text-align: center;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: 1.25rem;
+}
+
+.months-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 550px), 1fr));
+    gap: 1.5rem;
+}
+
+.month-card {
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.month-card:hover {
+    transform: translateY(-2px);
+}
+
+.month-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: bold;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--primary-text);
+    text-align: center;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex: 1;
+}
+
+.weekday {
+    text-align: center;
+    font-size: clamp(1.125rem, 3vw, 1.75rem);
+    font-weight: bold;
+    padding: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.weekday:first-child {
+    color: var(--holiday-color);
+}
+
+.weekday:last-child {
+    color: var(--saturday-color);
+}
+
+.day-cell {
+    text-align: center;
+    padding: 0.375rem;
+    min-height: clamp(5rem, 11vw, 6rem);
+    border: 1px solid var(--border-color);
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    gap: 0.375rem;
+    transition: all 0.2s ease;
+    border-radius: 0.5rem;
+}
+
+.day-cell:hover {
+    background-color: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.date {
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.375rem;
+    min-width: 2em;
+    margin-bottom: 0.25rem;
+}
+
+.day-cell:nth-child(7n) .date:not(.holiday) {
+    color: var(--saturday-color);
+}
+
+.day-cell:nth-child(7n+1) .date,
+.holiday {
+    color: var(--holiday-color);
+}
+
+.class-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    line-height: 1;
+    gap: 0.25rem;
+    width: calc(100% - 0.5rem);
+}
+
+.class-numbers .number,
+.class-numbers .quarter {
+    font-size: clamp(0.875rem, 2.25vw, 1.125rem);
+    min-width: 1.5em;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.class-numbers .number {
+    font-weight: bold;
+    color: #374151;
+}
+
+.class-numbers .quarter {
+    color: #6b7280;
+}
+
+.event {
+    font-size: clamp(0.875rem, 2.25vw, 1.125rem);
+    padding: 0.25rem 0.375rem;
+    border-radius: 0.375rem;
+    line-height: 1.2;
+    width: calc(100% - 0.5rem);
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin: 0.125rem 0;
+    transition: all 0.2s ease;
+}
+
+.event:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event.holiday {
+    color: var(--holiday-color);
+    background-color: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.15);
+}
+
+.event.special {
+    color: var(--special-color);
+    background-color: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+.event.exam {
+    color: var(--exam-color);
+    background-color: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.15);
+    font-weight: 600;
+}
+
+/* モーダル関連のスタイル */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 400px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: auto;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header button {
+    font-size: 1.2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.25rem 0.5rem;
+}
+
+.modal-body {
+    max-height: calc(90vh - 150px);
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* モーダルフォーム要素 */
+.modal-body label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.modal-body input[type="text"],
+.modal-body select {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+.modal-body input[type="text"]:focus,
+.modal-body select:focus {
+    outline: none;
+    border-color: var(--button-bg);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.modal-close-btn {
+    font-size: 1.2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    color: #000;
+}
+
+.confirm-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background: #fafafa;
+    margin: 1rem 0;
+}
+
+.modal-footer {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 1rem 0;
+    margin-top: 1rem;
+    text-align: right;
+    border-top: 1px solid var(--border-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.period-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.period-checkboxes div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.period-checkboxes input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.period-checkboxes label {
+    margin: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .calendar-container {
+        padding: 1rem;
+        width: 98%;
+    }
+
+    .month-card {
+        padding: 0.5rem;
+    }
+
+    .day-cell {
+        padding: 0.125rem;
+    }
+
+    .event {
+        font-size: 0.75em;
+        padding: 0.125rem 0.25rem;
+    }
+}
